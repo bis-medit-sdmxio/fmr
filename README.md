@@ -11,6 +11,10 @@ It provides:
 - Three integrated metadata-driven data processing services: data validation, data transformation (mapping data between structures) and conversion of data between SDMX data formats. Usable through the web UI or integrated into data automation processes using the REST API.
 - Metadata authoring and maintenance web UI, enabling metadata managers to browse, author and maintain their structural metadata model.
 
+Find out more about FMR on [sdmx.io](https://www.sdmx.io/tools/fmr/).
+
+FMR is a [BIS Open Tech](https://www.bis.org/innovation/bis_open_tech.htm) initiative
+
 ## 10 minute quick start with Docker
 Start by installing [Docker Desktop](https://www.docker.com/products/docker-desktop/) or another container runtime platform like [Podman](https://podman.io/).
 > [!NOTE]
