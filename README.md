@@ -8,7 +8,7 @@ FMR helps official statistics organisations externalise and gain control of thei
 
 It provides:
 - A controlled repository for SDMX structural metadata, which acts as a single source of truth for: automated metadata-driven data processing systems, metadata needed by data providers in data collections, structures for the purposes of standardisation, statistical data harmonisation, and communal benefit.
-- Three integrated metadata-driven data processing services: data validation, data transformation (mapping data between structures) and conversion of data between SDMX data formats. Usable through the web UI or integrated into data automation processes using the REST API.
+- Three integrated metadata-driven data processing services: data validation, data transformation (mapping data between structures) and conversion of data between SDMX data formats. 
 - Metadata authoring and maintenance web UI, enabling metadata managers to browse, author and maintain their structural metadata model.
 
 Find out more about FMR on [sdmx.io](https://www.sdmx.io/tools/fmr/).
