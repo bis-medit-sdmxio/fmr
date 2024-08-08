@@ -24,7 +24,7 @@ Download the image from Docker Hub and start a container called 'fmr'.
 ```bash
 docker run --name fmr -p 8080:8080 sdmxio/fmr-mysql:latest
 ```
-The container will take between 1 and 2 minites to start, so please be patient!
+The container will take between 1 and 2 minutes to start, so please be patient!
 
 There is a single Root User Account:<br>
 Username: root<br>
