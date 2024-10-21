@@ -26,6 +26,8 @@ docker run --name fmr -p 8080:8080 sdmxio/fmr-mysql:latest
 ```
 The container will take between 1 and 2 minutes to start, so please be patient!
 
+Navigate to http://localhost:8080 using your web browser.
+
 There is a single Root User Account:<br>
 Username: root<br>
 Password: password
