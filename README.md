@@ -43,9 +43,19 @@ docker stop fmr
 FMR is a Java enterprise web application so can be deployed on an application server like Apache Tomcat or Wildfly on Windows, Linux or Mac.
 
 First assemble the prerequisites needed to run an FMR installation:
-- Java runtime such as OpenJDK - version 11 is recommended
+### FMR 11
+- Java runtime such as OpenJDK - version 17 is recommended
 - Java web application server - Apache Tomcat 9 is recommended
-- SQL database service - FMR supports MySQL 5.7 and 8, MariaDB, SQL Server and Oracle - MariaDB 10 is recommended
+- SQL database service - FMR supports MySQL 5.7 and 8, MariaDB, SQL Server and Oracle
+> [!NOTE]
+> FMR 11 will not operate with Apache Tomcat 10 or later
+
+### FMR 12
+- Java runtime such as OpenJDK - version 21 is recommended
+- Java web application server - Apache Tomcat 10.1 is recommended
+- SQL database service - FMR supports MySQL 5.7 and 8, MariaDB, SQL Server and Oracle
+> [!NOTE]
+> FMR 12 requires Apache Tomcat 10 and later
 
 Next:
 1. Download the FMR 'war' file from the GitHub package repo https://github.com/bis-medit-sdmxio/fmr/releases
@@ -53,4 +63,4 @@ Next:
 3. Using a web browser, navigate to the deployed root URL, for instance `http://localhost:8080`
 4. After the FMR application starts, you should see the install pages - complete these with the database connection details and server settings requested
 
-There's more information on how to install and configure FMR on the [wiki](https://fmrwiki.sdmxcloud.org/Quick_start_guide_-_Windows,_Linux_or_Mac). 
+There's more information on how to install and configure FMR on the [wiki](https://fmrwiki.sdmx.io/latest/admin/installation/InstallJavaRuntimeEnvironment/). 
