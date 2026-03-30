@@ -1,0 +1,51 @@
+services:
+  fmr:
+    container_name: fmrwebapp
+    hostname: fmr12
+    image: sdmxio/fmr:12.0.0-beta.22
+    environment:
+      SERVER_URL: "http://localhost:8179/"
+      # JAVA_OPTS: '-DTF_ALTERNATE_HALF_YEAR=true'
+    healthcheck:
+      test: curl --fail http://localhost:8179/ws/fusion/info/product || exit 1
+      timeout: 10s
+      start_period: 30s
+      retries: 10
+    depends_on:
+      database:
+        condition: service_healthy
+        restart: true 
+    ports:
+      - 8179:8179
+    volumes:
+      - ./config/SDMX_IO:/root/SDMX_IO        
+      - ./config/tomcat/conf/server.xml:/usr/local/tomcat/conf/server.xml
+    networks:
+      - fmrnetwork 
+
+  database:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: "password"
+      MYSQL_DATABASE: "fmr"
+      MYSQL_USER: "fmruser"
+      MYSQL_PASSWORD: "password"
+    healthcheck:
+      test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
+      timeout: 2s
+      retries: 10
+    container_name: fmrdatabase
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - fmrnetwork 
+
+networks:
+  fmrnetwork:
+    driver: bridge
+
+volumes:
+  mysql_data:
+    driver: local
+
