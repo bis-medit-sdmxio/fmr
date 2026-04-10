@@ -5,6 +5,7 @@
 - MariaDB 12 latest
 
 ## Configuration
+The database connection is configured by JNDI referencing the `fmrdatabase` resource in the Tomcat global context.
 
 ## Initial start up
 Step 1 - Start the containers.
