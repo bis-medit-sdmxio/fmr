@@ -1,4 +1,4 @@
-## FMR 12 Docker compos
+## FMR 12 Docker compose
 
 ## Composition
 - FMR 12 latest on Apache Tomcat 10.1
