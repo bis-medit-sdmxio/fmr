@@ -55,7 +55,7 @@ First assemble the prerequisites needed to run an FMR installation:
 - Java web application server - Apache Tomcat 10.1 is recommended
 - SQL database service - FMR supports MySQL 5.7 and 8, MariaDB, SQL Server and Oracle
 > [!NOTE]
-> FMR 12 requires Apache Tomcat 10 and later
+> FMR 12 requires Apache Tomcat 10.1 and later
 
 Next:
 1. Download the FMR 'war' file from the GitHub package repo https://github.com/bis-medit-sdmxio/fmr/releases
