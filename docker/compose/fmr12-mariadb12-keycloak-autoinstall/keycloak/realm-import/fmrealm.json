@@ -1,0 +1,96 @@
+{
+    "realm": "fmr",
+    "enabled": true,
+    "displayName": "FMR Realm",
+    "registrationAllowed": false,
+    "loginWithEmailAllowed": true,
+    "duplicateEmailsAllowed": false,
+    "resetPasswordAllowed": true,
+    "clients": [
+        {
+            "clientId": "fmrwebapp",
+            "name": "FMR Web App",
+            "enabled": true,
+            "protocol": "openid-connect",
+            "attributes": {
+                "pkce.code.challenge.method": "S256"
+            },
+            "publicClient": true,
+            "standardFlowEnabled": true,
+            "directAccessGrantsEnabled": false,
+            "implicitFlowEnabled": false,
+            "serviceAccountsEnabled": false,
+            "redirectUris": [
+                "http://localhost:8179/ws/fusion/oauth/callback"
+            ],
+            "webOrigins": [
+                "*"
+            ],
+            "protocolMappers": [
+                {
+                    "id": "bafe7046-78e3-49cd-bd3c-eba762cbf7fe",
+                    "name": "groups",
+                    "protocol": "openid-connect",
+                    "protocolMapper": "oidc-group-membership-mapper",
+                    "consentRequired": false,
+                    "config": {
+                        "full.path": "false",
+                        "introspection.token.claim": "true",
+                        "userinfo.token.claim": "true",
+                        "multivalued": "true",
+                        "id.token.claim": "true",
+                        "lightweight.claim": "false",
+                        "access.token.claim": "true",
+                        "claim.name": "groups"
+                    }
+                }
+            ]
+        }
+    ],
+    "groups": [
+        {
+            "name": "maintainers"
+        },
+        {
+            "name": "admins"
+        }
+    ],
+    "users": [
+        {
+            "username": "maintainer",
+            "enabled": true,
+            "emailVerified": true,
+            "firstName": "Maintainer",
+            "lastName": "User",
+            "email": "maintainer@example.com",
+            "credentials": [
+                {
+                    "type": "password",
+                    "value": "password",
+                    "temporary": false
+                }
+            ],
+            "groups": [
+                "maintainers"
+            ]
+        },
+        {
+            "username": "admin",
+            "enabled": true,
+            "emailVerified": true,
+            "firstName": "Admin",
+            "lastName": "User",
+            "email": "admin@example.com",
+            "credentials": [
+                {
+                    "type": "password",
+                    "value": "password",
+                    "temporary": false
+                }
+            ],
+            "groups": [
+                "admins"
+            ]
+        }
+    ]
+}

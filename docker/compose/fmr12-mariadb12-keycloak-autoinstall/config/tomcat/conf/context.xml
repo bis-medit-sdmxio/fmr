@@ -1,0 +1,16 @@
+<Context>
+  <Resource
+    name="fmrdatabase"
+    auth="Container"
+    type="javax.sql.DataSource"
+    driverClassName="org.mariadb.jdbc.Driver"
+    url="jdbc:mariadb://fmrdatabase:3306/fmr"
+    username="root"
+    password="password"
+    maxTotal="10"
+    minIdle="5"
+    maxWaitMillis="-1"
+    timeBetweenEvictionRunsMillis="7200000"
+    minEvictableIdleTimeMillis="3600000"
+    defaultAutoCommit="false" />
+</Context>

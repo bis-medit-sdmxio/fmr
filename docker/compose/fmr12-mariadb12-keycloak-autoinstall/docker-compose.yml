@@ -1,0 +1,95 @@
+services:
+  fmr:
+    container_name: fmrwebapp
+    hostname: fmr12
+    image: sdmxio/fmr:12-latest
+    environment:
+      SERVER_URL: "http://localhost:8179/"
+      # JAVA_OPTS: '-DTF_ALTERNATE_HALF_YEAR=true'
+      JAVA_OPTS: '-Xmx16G'
+    healthcheck:
+      test: curl --fail http://localhost:8179/ws/fusion/info/product || exit 1
+      timeout: 10s
+      start_period: 30s
+      retries: 10
+    depends_on:
+      database:
+        condition: service_healthy
+        restart: true 
+    ports:
+      - 8179:8179
+    volumes:
+      - ./config/SDMX_IO:/root/SDMX_IO        
+      - ./config/tomcat/conf/server.xml:/usr/local/tomcat/conf/server.xml
+      - ./config/tomcat/conf/context.xml:/usr/local/tomcat/conf/context.xml
+      - ./scripts/redirect-localhost.sh:/bootstrap/redirect-localhost.sh:ro
+    post_start:
+      - command: ["/bin/bash", "/bootstrap/redirect-localhost.sh"]
+        user: root
+    networks:
+      - fmrnetwork 
+
+  fmrbootstrap:
+    container_name: fmrbootstrap
+    image: curlimages/curl:8.7.1
+    depends_on:
+      fmr:
+        condition: service_healthy
+    restart: "no"
+    command: ["/bin/sh", "/bootstrap/auto-install.sh"]
+    volumes:
+      - ./scripts/auto-install.sh:/bootstrap/auto-install.sh:ro
+    networks:
+      - fmrnetwork
+
+  database:
+    image: mariadb:12 
+    restart: always
+    environment:
+      MARIADB_ROOT_PASSWORD: "password"
+      MARIADB_DATABASE: "fmr"
+      MARIADB_USER: "fmruser"
+      MARIADB_PASSWORD: "password"
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      start_period: 10s
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    container_name: fmrdatabase
+    volumes:
+      - fmr_data:/var/lib/mysql
+    networks:
+      - fmrnetwork 
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:26.6.0
+    container_name: fmrkeycloak
+    command:
+      - start-dev
+      - --import-realm
+      - --hostname=http://localhost:8178
+    environment:
+      KC_BOOTSTRAP_ADMIN_USERNAME: admin
+      KC_BOOTSTRAP_ADMIN_PASSWORD: admin
+      KC_DB: dev-file
+      KC_HTTP_ENABLED: "true"
+      KC_HOSTNAME_STRICT: "false"
+      KC_HEALTH_ENABLED: "true"  
+    ports:
+      - "8178:8080"
+      - "9000:9000"
+    volumes:
+      - ./keycloak/realm-import:/opt/keycloak/data/import:ro
+      - keycloak_data:/opt/keycloak/data      
+    networks:
+      - fmrnetwork
+
+networks:
+  fmrnetwork:
+    driver: bridge
+
+volumes:
+  fmr_data:
+    driver: local
+  keycloak_data:
